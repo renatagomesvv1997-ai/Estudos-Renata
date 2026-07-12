@@ -467,8 +467,7 @@ function viewGenerate(){
     + '<p class="sub">Gerou as questões no claude.ai (plano grátis) ou outro chat? Cole aqui o bloco JSON que ele devolveu.</p>'
     + '<label class="lbl">JSON das questões</label>'
     + '<textarea id="impText" rows="5" placeholder=\'[{"enunciado":"...","gabarito":"Certo","justificativa":"..."}]\'></textarea>'
-    + '<div class="row c2 mt"><div><label class="lbl" style="margin-top:0">Lei</label><select id="impLei">'+lawOpts+'</select></div>'
-    + '<div><label class="lbl" style="margin-top:0">Artigo</label><input id="impArt" type="text" placeholder="Art. 37"></div></div>'
+    + '<label class="lbl">Lei</label><select id="impLei">'+lawOpts+'</select>'
     + '<button class="btn green mt-s" id="impGo">Importar questões</button>'
     + '<div id="impMsg"></div></div>';
   return h;
@@ -673,9 +672,9 @@ function wireGenerate(){
     if(!txt){ msg.innerHTML='<div class="err">Cole o JSON primeiro.</div>'; return; }
     try{
       var items=parseQuestionsJSON(txt);
-      var lei=document.getElementById("impLei").value, art=document.getElementById("impArt").value.trim();
+      var lei=document.getElementById("impLei").value;
       items.forEach(function(s){ state.questions.unshift({id:uid(),enunciado:s.enunciado,gabarito:s.gabarito,
-        justificativa:s.justificativa,lei:lei,artigo:art,streak:0,attempts:0,correct:0,lastReview:null,nextReview:null,createdAt:Date.now()}); });
+        justificativa:s.justificativa,lei:lei,artigo:"",streak:0,attempts:0,correct:0,lastReview:null,nextReview:null,createdAt:Date.now()}); });
       saveState(); state.tab="dashboard"; render();
     }catch(e){ msg.innerHTML='<div class="err">'+esc(e.message)+'</div>'; }
   };
