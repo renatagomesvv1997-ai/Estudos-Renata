@@ -1,0 +1,5 @@
+# Evita que o Windows marque todos os arquivos como modificados só por causa
+# da quebra de linha (CRLF vs LF). Sem isso, "git status" mostra o arquivo
+# inteiro alterado mesmo quando nada mudou de verdade.
+* text=auto eol=lf
+*.png binary
